@@ -1,0 +1,17 @@
+version: '3'
+services:
+  llm-service:
+    build: .
+    ports:
+      - "8080:8080"
+      - "11434:11434"
+    environment:
+      - DEFAULT_MODEL=llama2
+      - PORT=8080
+      - OLLAMA_URL=http://localhost:11434
+    volumes:
+      - ollama-models:/root/.ollama
+    restart: unless-stopped
+
+volumes:
+  ollama-models:
