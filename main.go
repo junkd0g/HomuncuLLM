@@ -41,16 +41,16 @@ type PromptResponse struct {
 
 // LLMService handles communication with the Ollama service
 type LLMService struct {
-	ollamaURL  string
-	httpClient *http.Client
+	ollamaURL    string
+	httpClient   *http.Client
 	defaultModel string
 }
 
 // NewLLMService creates a new service
 func NewLLMService(ollamaURL string, defaultModel string) *LLMService {
 	return &LLMService{
-		ollamaURL:  ollamaURL,
-		httpClient: &http.Client{Timeout: 60 * time.Second},
+		ollamaURL:    ollamaURL,
+		httpClient:   &http.Client{Timeout: 60 * time.Second},
 		defaultModel: defaultModel,
 	}
 }
@@ -94,12 +94,12 @@ func main() {
 	if ollamaURL == "" {
 		ollamaURL = "http://localhost:11434"
 	}
-	
+
 	defaultModel := os.Getenv("DEFAULT_MODEL")
 	if defaultModel == "" {
 		defaultModel = "llama2"
 	}
-	
+
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
@@ -110,7 +110,7 @@ func main() {
 
 	// Setup Gin router
 	router := gin.Default()
-	
+
 	// Add CORS middleware
 	router.Use(func(c *gin.Context) {
 		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
